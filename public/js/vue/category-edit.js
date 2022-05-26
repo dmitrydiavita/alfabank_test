@@ -17,7 +17,7 @@ export default {
         <form v-if="category !== null">
           <div class="mb-3">
             <label for="name" class="form-label">Название</label>
-            <input v-model="category.name" class="form-control" id="name" placeholder="Введите название">
+            <input v-model="category.name" class="form-control" id="name" placeholder="Введите название" autocomplete="off">
             
             <div id="nameHelp" class="form-text">Не меньше одного символа.</div>
              
