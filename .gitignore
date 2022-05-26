@@ -4,6 +4,9 @@
 /config/secrets/prod/prod.decrypt.private.php
 /public/bundles/
 /var/
+!/var/log/.gitkeep
 /vendor/
-
+/docker/mysql/datadir/
+!/docker/mysql/datadir/.gitkeep
 .idea
+/composer.phar

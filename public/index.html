@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="UTF-8">
+
+    <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.css" />
+</head>
+
+<script src="https://unpkg.com/vue@3"></script>
+<script src="https://unpkg.com/vue-router@4"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script type="module">
+    const { createApp } = Vue;
+
+    import CategoryList from './js/vue/category-list.js'
+    import CategoryEdit from './js/vue/category-edit.js'
+    import CategoryNew from './js/vue/category-new.js'
+
+    const routes = [
+        { path: '/', component: CategoryList },
+        { path: '/edit/:id', component: CategoryEdit, name: 'edit' },
+        { path: '/new', component: CategoryNew },
+    ];
+
+    const router = VueRouter.createRouter({
+        history: VueRouter.createWebHashHistory(),
+        routes,
+    });
+
+    createApp()
+        .use(router)
+        .mount('#app')
+</script>
+
+
+<div id="app" class="container">
+    <nav class="navbar navbar-expand navbar-light bg-light px-3">
+        <a class="navbar-brand " href="#">Категории товаров</a>
+
+        <div class="navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <router-link to="/" class="nav-item nav-link">Список категорий</router-link>
+                <router-link to="/new" class="nav-item nav-link">Новая категория</router-link>
+            </div>
+        </div>
+    </nav>
+
+    <div class="pt-3">
+        <router-view></router-view>
+    </div>
+</div>
+
+</html>
