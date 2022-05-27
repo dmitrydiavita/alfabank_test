@@ -16,6 +16,7 @@ class Category
      * @ORM\GeneratedValue
      */
     protected $id;
+
     /**
      * @ORM\Column(type="string")
      */

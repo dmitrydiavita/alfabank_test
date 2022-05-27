@@ -7,6 +7,7 @@ use App\Form\Type\CategoryType;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,9 +15,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class CategoryApiController extends AbstractController
 {
     /**
-     * @Route("/category-list", name="app_category_list")
+     * @Route("/category-list", format="json", name="app_category_list")
      */
-    public function list(EntityManagerInterface $em): Response
+    public function list(EntityManagerInterface $em): JsonResponse
     {
         /** @var Category[] $categories */
         $categories = $em->getRepository(Category::class)->findAll();
@@ -33,9 +34,9 @@ class CategoryApiController extends AbstractController
     }
 
     /**
-     * @Route("/category-read/{id}", name="app_category_read")
+     * @Route("/category-read/{id}", format="json", name="app_category_read")
      */
-    public function read(int $id, EntityManagerInterface $em): Response
+    public function read(int $id, EntityManagerInterface $em): JsonResponse
     {
         /** @var Category $category */
         $category = $em->getRepository(Category::class)->find($id);
@@ -47,9 +48,9 @@ class CategoryApiController extends AbstractController
     }
 
     /**
-     * @Route("/category-create", methods={"POST"}, name="app_category_create")
+     * @Route("/category-create", methods={"POST"}, format="json", name="app_category_create")
      */
-    public function create(Request $request, EntityManagerInterface $em): Response
+    public function create(Request $request, EntityManagerInterface $em): JsonResponse
     {
         $category = new Category();
         $form = $this->container->get('form.factory')->createNamed('', CategoryType::class, $category);
@@ -66,14 +67,14 @@ class CategoryApiController extends AbstractController
         }
 
         return $this->json([
-            'error' => $form->getErrors()->__toString(),
+            'error' => "Form is not valid",
         ]);
     }
 
     /**
-     * @Route("/category-edit/{id}", methods={"POST"}, name="app_category_edit")
+     * @Route("/category-edit/{id}", methods={"POST"}, format="json", name="app_category_edit")
      */
-    public function edit(int $id, Request $request, EntityManagerInterface $em): Response
+    public function edit(int $id, Request $request, EntityManagerInterface $em): JsonResponse
     {
         /** @var EntityRepository $repository */
         $repository = $em->getRepository(Category::class);
@@ -97,15 +98,15 @@ class CategoryApiController extends AbstractController
         }
 
         return $this->json([
-            'error' => $form->getErrors()->__toString(),
+            'error' => "Form is not valid",
         ]);
     }
 
 
     /**
-     * @Route("/category-delete/{id}", methods={"POST"}, name="app_category_delete")
+     * @Route("/category-delete/{id}", methods={"POST"}, format="json", name="app_category_delete")
      */
-    public function delete(int $id, Request $request, EntityManagerInterface $em): Response
+    public function delete(int $id, Request $request, EntityManagerInterface $em): JsonResponse
     {
         /** @var EntityRepository $repository */
         $repository = $em->getRepository(Category::class);

@@ -14,7 +14,7 @@ services:
     build:
       context: ./docker/php
       dockerfile: Dockerfile
-    image: php-fpm-mysql
+    image: php-fpm-7.2-mysql
     volumes:
       - .:/var/www/project
     links:
