@@ -45,14 +45,8 @@ php bin/console --env=test doctrine:schema:create
 
 Переходим в браузере по адресу http://localhost:8080
 
-#### Список категорий
-
 ![Список](./docs/list.png)
 
-#### Новая категория
-
 ![Новая категория](./docs/new.png)
-
-#### Редактирование
 
 ![Редактирование](./docs/edit.png)
